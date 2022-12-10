@@ -3,10 +3,13 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Rendering;
+using Unity.Transforms;
 
 [BurstCompile]
 partial struct SoldierSpawningSystem : ISystem
 {
+    ComponentLookup<LocalTransform> m_LocalToWorldTransformFromEntity;
+
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
@@ -27,6 +30,8 @@ partial struct SoldierSpawningSystem : ISystem
 
         var units = CollectionHelper.CreateNativeArray<Entity>(config.SoldierCount, Allocator.Temp);
         ecb.Instantiate(config.SoldierPrefab, units);
+        
+ 
 
         // This system should only run once at startup. So it disables itself after one update.
         state.Enabled = false;

@@ -4,5 +4,7 @@ struct Config : IComponentData
 {
     public Entity SoldierPrefab;
     public int SoldierCount;
+    public Entity SoldierSpawner;
+
 
 }
